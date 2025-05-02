@@ -1,71 +1,84 @@
-import { useState } from "react";
+import { useTodos } from "@/hooks/useTodos";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import FilterTabs from "./FilterTabs";
-import { useTodos } from "@/hooks/useTodos";
-import { Card, CardContent } from "@/components/ui/card";
-import { Filter } from "@/lib/types";
+import { Title } from "@/components/ui/title";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 
 const TodoApp = () => {
   const {
     todos,
-    isLoading,
     addTodo,
     toggleTodo,
     deleteTodo,
     editTodo,
-    clearCompleted,
-    remainingCount,
+    filter,
+    setFilter,
+    isLoading,
   } = useTodos();
-  const [currentFilter, setCurrentFilter] = useState<Filter>("all");
 
-  const filteredTodos = todos.filter((todo) => {
-    if (currentFilter === "all") return true;
-    if (currentFilter === "active") return !todo.completed;
-    if (currentFilter === "completed") return todo.completed;
-    return true;
-  });
+  const activeCount = todos.filter((todo) => !todo.completed).length;
+  const completedCount = todos.filter((todo) => todo.completed).length;
+  const totalCount = todos.length;
 
   return (
-    <div className="min-h-screen flex items-start justify-center px-4 py-12 bg-gray-100">
-      <Card className="w-full max-w-md overflow-hidden shadow-lg animate-fadeIn">
-        {/* App Header */}
-        <div className="bg-primary text-white px-6 py-4">
-          <h1 className="text-xl font-semibold">My Todo List</h1>
-          <p className="text-sm opacity-80">Stay organized and productive</p>
-        </div>
+    <div className="container max-w-3xl mx-auto px-4 py-8">
+      <div className="text-center mb-8">
+        <Title className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary to-blue-700 text-transparent bg-clip-text">
+          Todo List App
+        </Title>
+        <p className="text-muted-foreground mt-2">
+          A simple task management application
+        </p>
+      </div>
 
-        {/* Todo Form */}
-        <CardContent className="p-6 border-b">
-          <TodoForm onAddTodo={addTodo} />
-        </CardContent>
-
-        {/* Filter Tabs */}
-        <FilterTabs currentFilter={currentFilter} onFilterChange={setCurrentFilter} />
-
-        {/* Todo List */}
-        <TodoList
-          todos={filteredTodos}
-          isLoading={isLoading}
-          onToggle={toggleTodo}
-          onDelete={deleteTodo}
-          onEdit={editTodo}
-          filter={currentFilter}
-        />
-
-        {/* Footer Stats */}
-        <div className="px-6 py-3 bg-gray-50 text-sm text-gray-500 flex justify-between items-center">
-          <div>
-            <span>{remainingCount}</span> items left
+      <Card>
+        <CardHeader className="pb-2">
+          <div className="flex justify-between items-center">
+            <Title>My Tasks</Title>
+            <div className="flex gap-2">
+              <Badge variant="outline">{activeCount} active</Badge>
+              <Badge variant="outline">{completedCount} completed</Badge>
+            </div>
           </div>
-          <button
-            className="text-sm text-gray-500 hover:text-gray-700 focus:outline-none"
-            onClick={clearCompleted}
-          >
-            Clear completed
-          </button>
-        </div>
+        </CardHeader>
+        <CardContent>
+          <TodoForm onAddTodo={addTodo} />
+          
+          <FilterTabs currentFilter={filter} onFilterChange={setFilter} />
+          
+          <div className="mt-4">
+            <TodoList
+              todos={todos}
+              isLoading={isLoading}
+              filter={filter}
+              onToggle={toggleTodo}
+              onDelete={deleteTodo}
+              onEdit={editTodo}
+            />
+          </div>
+
+          {totalCount > 0 && (
+            <div className="mt-6 pt-4 border-t text-sm text-muted-foreground">
+              {filter === "all" ? (
+                <span>
+                  {activeCount} tasks left to complete, {completedCount} completed
+                </span>
+              ) : filter === "active" ? (
+                <span>{activeCount} active tasks</span>
+              ) : (
+                <span>{completedCount} completed tasks</span>
+              )}
+            </div>
+          )}
+        </CardContent>
       </Card>
+      
+      <footer className="mt-8 text-center text-sm text-muted-foreground">
+        <p>Double-click to edit a task • Data is saved in your browser</p>
+      </footer>
     </div>
   );
 };
