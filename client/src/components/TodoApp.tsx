@@ -62,28 +62,28 @@ const TodoApp = () => {
         </div>
       </div>
 
-      <Card className="border-primary/20">
-        <CardHeader className="pb-2 bg-primary/5 rounded-t-lg">
+      <Card className="border-primary/20 dark:border-primary/10">
+        <CardHeader className="pb-2 bg-primary/5 dark:bg-primary/10 rounded-t-lg">
           <div className="flex justify-between items-center">
             <Title className="text-primary">My Tasks</Title>
             <div className="flex gap-2">
-              <Badge variant="outline" className="bg-primary/10">
+              <Badge variant="outline" className="bg-primary/10 dark:bg-primary/20">
                 {activeCount} active
               </Badge>
-              <Badge variant="outline" className="bg-primary/10">
+              <Badge variant="outline" className="bg-primary/10 dark:bg-primary/20">
                 {completedCount} completed
               </Badge>
             </div>
           </div>
           {activeCount > 0 && (
             <div className="flex flex-wrap gap-2 mt-2">
-              <Badge variant="outline" className={`${getPriorityColor("high")} bg-red-100/50`}>
+              <Badge variant="outline" className={`${getPriorityColor("high")} bg-red-100/50 dark:bg-red-950/50`}>
                 <Flag size={12} className="mr-1" /> {priorityCounts.high} high priority
               </Badge>
-              <Badge variant="outline" className={`${getPriorityColor("medium")} bg-yellow-100/50`}>
+              <Badge variant="outline" className={`${getPriorityColor("medium")} bg-yellow-100/50 dark:bg-yellow-950/50`}>
                 <Flag size={12} className="mr-1" /> {priorityCounts.medium} medium priority
               </Badge>
-              <Badge variant="outline" className={`${getPriorityColor("low")} bg-blue-100/50`}>
+              <Badge variant="outline" className={`${getPriorityColor("low")} bg-blue-100/50 dark:bg-blue-950/50`}>
                 <Flag size={12} className="mr-1" /> {priorityCounts.low} low priority
               </Badge>
             </div>

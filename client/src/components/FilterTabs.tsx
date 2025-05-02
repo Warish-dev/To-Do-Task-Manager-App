@@ -15,7 +15,7 @@ const FilterTabs = ({ currentFilter, onFilterChange }: FilterTabsProps) => {
       onValueChange={(value) => onFilterChange(value as Filter)}
       className="w-full"
     >
-      <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-teal-500/20 to-blue-500/20 p-1">
+      <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-teal-500/20 to-blue-500/20 dark:from-teal-500/30 dark:to-blue-500/30 p-1">
         {["all", "active", "completed"].map((filter) => (
           <TabsTrigger 
             key={filter} 

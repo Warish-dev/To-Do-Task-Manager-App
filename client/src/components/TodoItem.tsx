@@ -60,23 +60,23 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
     switch (priority) {
       case "high":
         return {
-          badge: "bg-red-100 text-red-700 hover:bg-red-200",
-          icon: "text-red-500"
+          badge: "bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-300 dark:hover:bg-red-900/60",
+          icon: "text-red-500 dark:text-red-400"
         };
       case "medium":
         return {
-          badge: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200",
-          icon: "text-yellow-500"
+          badge: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200 dark:bg-yellow-900/40 dark:text-yellow-300 dark:hover:bg-yellow-900/60",
+          icon: "text-yellow-500 dark:text-yellow-400"
         };
       case "low":
         return {
-          badge: "bg-blue-100 text-blue-700 hover:bg-blue-200",
-          icon: "text-blue-500"
+          badge: "bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-300 dark:hover:bg-blue-900/60",
+          icon: "text-blue-500 dark:text-blue-400"
         };
       default:
         return {
-          badge: "bg-gray-100 text-gray-700 hover:bg-gray-200",
-          icon: "text-gray-500"
+          badge: "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700",
+          icon: "text-gray-500 dark:text-gray-400"
         };
     }
   };
@@ -85,8 +85,8 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
 
   return (
     <div
-      className={`border rounded-md p-4 mb-2 flex items-center justify-between transition-colors ${
-        todo.completed ? "bg-muted" : "bg-card"
+      className={`border dark:border-primary/10 rounded-md p-4 mb-2 flex items-center justify-between transition-colors ${
+        todo.completed ? "bg-muted dark:bg-muted/70" : "bg-card dark:bg-card/70"
       }`}
     >
       {isEditing ? (
@@ -160,7 +160,9 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
               
               {todo.description && (
                 <p className={`text-sm mt-1 ${
-                  todo.completed ? "line-through text-muted-foreground" : "text-gray-600"
+                  todo.completed 
+                    ? "line-through text-muted-foreground" 
+                    : "text-gray-600 dark:text-gray-400"
                 }`}>
                   {todo.description}
                 </p>
