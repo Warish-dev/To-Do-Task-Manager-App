@@ -32,10 +32,11 @@ export function useTodos() {
   }, [todos, isLoading]);
 
   // Add a new todo
-  const addTodo = (text: string, priority: Priority = "medium") => {
+  const addTodo = (text: string, description?: string, priority: Priority = "medium") => {
     const newTodo: Todo = {
       id: uuidv4(),
       text,
+      description,
       completed: false,
       createdAt: new Date().toISOString(),
       priority,
@@ -58,7 +59,7 @@ export function useTodos() {
   };
 
   // Edit a todo
-  const editTodo = (id: string, updates: Partial<Pick<Todo, 'text' | 'priority'>>) => {
+  const editTodo = (id: string, updates: Partial<Pick<Todo, 'text' | 'description' | 'priority'>>) => {
     setTodos(
       todos.map((todo) => (todo.id === id ? { ...todo, ...updates } : todo))
     );

@@ -18,23 +18,29 @@ interface TodoItemProps {
   todo: Todo;
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
-  onEdit: (id: string, updates: Partial<Pick<Todo, 'text' | 'priority'>>) => void;
+  onEdit: (id: string, updates: Partial<Pick<Todo, 'text' | 'description' | 'priority'>>) => void;
 }
 
 const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todo.text);
+  const [editDescription, setEditDescription] = useState(todo.description || "");
   const [editPriority, setEditPriority] = useState<Priority>(todo.priority);
 
   const handleEdit = () => {
     setIsEditing(true);
     setEditText(todo.text);
+    setEditDescription(todo.description || "");
     setEditPriority(todo.priority);
   };
 
   const handleSave = () => {
     if (editText.trim()) {
-      onEdit(todo.id, { text: editText, priority: editPriority });
+      onEdit(todo.id, { 
+        text: editText, 
+        description: editDescription || undefined,
+        priority: editPriority 
+      });
       setIsEditing(false);
     }
   };
@@ -42,6 +48,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
   const handleCancel = () => {
     setIsEditing(false);
     setEditText(todo.text);
+    setEditDescription(todo.description || "");
     setEditPriority(todo.priority);
   };
 
@@ -126,7 +133,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
               <div className="flex items-center gap-2">
                 <label
                   htmlFor={`todo-${todo.id}`}
-                  className={`text-base cursor-pointer ${
+                  className={`text-base cursor-pointer font-medium ${
                     todo.completed ? "line-through text-muted-foreground" : ""
                   }`}
                 >
@@ -140,7 +147,16 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
                   {todo.priority}
                 </Badge>
               </div>
-              <span className="text-xs text-muted-foreground">
+              
+              {todo.description && (
+                <p className={`text-sm mt-1 ${
+                  todo.completed ? "line-through text-muted-foreground" : "text-gray-600"
+                }`}>
+                  {todo.description}
+                </p>
+              )}
+              
+              <span className="text-xs text-muted-foreground mt-1">
                 Created: {formattedDate}
               </span>
             </div>
