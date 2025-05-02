@@ -3,6 +3,7 @@ import { Todo, Priority } from "@/lib/types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Pencil, Trash2, X, Check, Flag } from "lucide-react";
 import { format } from "date-fns";
 import {
@@ -95,6 +96,7 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
               value={editText}
               onChange={(e) => setEditText(e.target.value)}
               className="flex-1"
+              placeholder="Task title"
               autoFocus
             />
             <Button size="icon" variant="ghost" onClick={handleSave}>
@@ -104,6 +106,14 @@ const TodoItem = ({ todo, onToggle, onDelete, onEdit }: TodoItemProps) => {
               <X size={18} className="text-red-500" />
             </Button>
           </div>
+          
+          <Textarea
+            value={editDescription}
+            onChange={(e) => setEditDescription(e.target.value)}
+            placeholder="Task description (optional)"
+            className="min-h-[80px] text-sm"
+          />
+          
           <div className="flex items-center gap-2">
             <label className="text-sm font-medium">Priority:</label>
             <Select

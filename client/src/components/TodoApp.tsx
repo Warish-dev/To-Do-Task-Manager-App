@@ -95,13 +95,7 @@ const TodoApp = () => {
               filter={filter}
               onToggle={toggleTodo}
               onDelete={deleteTodo}
-              onEdit={(id, updates) => {
-                if (typeof updates === 'string') {
-                  editTodo(id, { text: updates });
-                } else {
-                  editTodo(id, updates);
-                }
-              }}
+              onEdit={editTodo}
             />
           </div>
 
@@ -122,7 +116,7 @@ const TodoApp = () => {
       </Card>
       
       <footer className="mt-8 text-center text-sm text-muted-foreground">
-        <p>Double-click to edit a task • Data is saved in your browser</p>
+        <p>Click the Edit button to update a task • Click Add New Task to create tasks with descriptions</p>
       </footer>
     </div>
   );
