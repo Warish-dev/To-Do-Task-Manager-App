@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Flag } from "lucide-react";
 import { Priority } from "@/lib/types";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const TodoApp = () => {
   const {
@@ -47,13 +48,18 @@ const TodoApp = () => {
 
   return (
     <div className="container max-w-3xl mx-auto px-4 py-8">
-      <div className="text-center mb-8">
-        <Title className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary to-emerald-400 text-transparent bg-clip-text">
-          Todo List App
-        </Title>
-        <p className="text-muted-foreground mt-2">
-          A simple task management application
-        </p>
+      <div className="flex justify-between items-center mb-8">
+        <div className="text-center flex-1">
+          <Title className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary to-emerald-400 text-transparent bg-clip-text">
+            Todo List App
+          </Title>
+          <p className="text-muted-foreground mt-2">
+            A simple task management application
+          </p>
+        </div>
+        <div className="flex-shrink-0">
+          <ThemeToggle />
+        </div>
       </div>
 
       <Card className="border-primary/20">
