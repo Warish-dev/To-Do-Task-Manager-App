@@ -8,7 +8,7 @@ interface TodoListProps {
   filter: Filter;
   onToggle: (id: string) => void;
   onDelete: (id: string) => void;
-  onEdit: (id: string, text: string) => void;
+  onEdit: (id: string, updates: Partial<Pick<Todo, 'text' | 'priority'>>) => void;
 }
 
 const TodoList = ({

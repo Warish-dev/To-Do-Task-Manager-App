@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Todo, Filter } from "@/lib/types";
+import { Todo, Filter, Priority } from "@/lib/types";
 import { loadTodos, saveTodos } from "@/lib/localStorage";
 
 export function useTodos() {
@@ -11,7 +11,16 @@ export function useTodos() {
   // Load todos from localStorage on initial render
   useEffect(() => {
     const loadedTodos = loadTodos();
-    setTodos(loadedTodos);
+    
+    // If any existing todos don't have priority, add medium priority as default
+    const updatedTodos = loadedTodos.map(todo => {
+      if (!todo.priority) {
+        return { ...todo, priority: "medium" as Priority };
+      }
+      return todo;
+    });
+    
+    setTodos(updatedTodos);
     setIsLoading(false);
   }, []);
 
@@ -23,12 +32,13 @@ export function useTodos() {
   }, [todos, isLoading]);
 
   // Add a new todo
-  const addTodo = (text: string) => {
+  const addTodo = (text: string, priority: Priority = "medium") => {
     const newTodo: Todo = {
       id: uuidv4(),
       text,
       completed: false,
       createdAt: new Date().toISOString(),
+      priority,
     };
     setTodos([...todos, newTodo]);
   };
@@ -48,9 +58,16 @@ export function useTodos() {
   };
 
   // Edit a todo
-  const editTodo = (id: string, text: string) => {
+  const editTodo = (id: string, updates: Partial<Pick<Todo, 'text' | 'priority'>>) => {
     setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
+      todos.map((todo) => (todo.id === id ? { ...todo, ...updates } : todo))
+    );
+  };
+
+  // Change priority of a todo
+  const changePriority = (id: string, priority: Priority) => {
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, priority } : todo))
     );
   };
 
@@ -61,12 +78,19 @@ export function useTodos() {
     return true; // 'all' filter
   });
 
+  // Sort todos by priority (high -> medium -> low)
+  const sortedTodos = [...filteredTodos].sort((a, b) => {
+    const priorityOrder = { high: 0, medium: 1, low: 2 };
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
+  });
+
   return {
-    todos: filteredTodos,
+    todos: sortedTodos,
     addTodo,
     toggleTodo,
     deleteTodo,
     editTodo,
+    changePriority,
     filter,
     setFilter,
     isLoading,
