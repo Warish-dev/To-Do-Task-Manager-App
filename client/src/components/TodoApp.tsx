@@ -5,21 +5,77 @@ import FilterTabs from "./FilterTabs";
 import { Title } from "@/components/ui/title";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Flag } from "lucide-react";
-import { Priority } from "@/lib/types";
+import { Flag, CheckCircle, AlertCircle, Trash2, Edit, SlidersHorizontal } from "lucide-react";
+import { Priority, Todo, Filter } from "@/lib/types";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { useToast } from "@/hooks/use-toast";
 
 const TodoApp = () => {
+  const { toast } = useToast();
+  
   const {
     todos,
-    addTodo,
-    toggleTodo,
-    deleteTodo,
-    editTodo,
+    addTodo: addTodoOriginal,
+    toggleTodo: toggleTodoOriginal,
+    deleteTodo: deleteTodoOriginal,
+    editTodo: editTodoOriginal,
     filter,
-    setFilter,
+    setFilter: setFilterOriginal,
     isLoading,
   } = useTodos();
+  
+  // Enhanced functions with toast notifications
+  const addTodo = (text: string, description?: string, priority?: Priority) => {
+    addTodoOriginal(text, description, priority);
+    toast({
+      title: "✅ Task added",
+      description: "Your new task has been created."
+    });
+  };
+  
+  const toggleTodo = (id: string) => {
+    const todo = todos.find(t => t.id === id);
+    toggleTodoOriginal(id);
+    
+    if (todo) {
+      const newStatus = !todo.completed;
+      toast({
+        title: newStatus ? "✅ Task completed" : "🔄 Task reopened",
+        description: newStatus ? "The task has been marked as completed." : "The task has been reopened."
+      });
+    }
+  };
+  
+  const deleteTodo = (id: string) => {
+    deleteTodoOriginal(id);
+    toast({
+      title: "🗑️ Task deleted",
+      description: "The task has been permanently removed."
+    });
+  };
+  
+  const editTodo = (id: string, updates: Partial<Pick<Todo, 'text' | 'description' | 'priority'>>) => {
+    editTodoOriginal(id, updates);
+    toast({
+      title: "✏️ Task updated",
+      description: "Your changes have been saved."
+    });
+  };
+  
+  const setFilter = (newFilter: Filter) => {
+    setFilterOriginal(newFilter);
+    
+    const filterMessages = {
+      all: "Showing all tasks",
+      active: "Showing active tasks only",
+      completed: "Showing completed tasks only"
+    };
+    
+    toast({
+      title: "🔍 Filter changed",
+      description: filterMessages[newFilter]
+    });
+  };
 
   const activeCount = todos.filter((todo) => !todo.completed).length;
   const completedCount = todos.filter((todo) => todo.completed).length;
