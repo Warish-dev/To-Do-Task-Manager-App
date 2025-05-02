@@ -74,31 +74,45 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className="flex space-x-1"
+                  className="flex justify-between gap-2"
                 >
-                  <FormItem className="flex items-center space-x-1 space-y-0">
+                  <FormItem className="flex-1 space-y-0">
                     <FormControl>
-                      <RadioGroupItem value="low" id="low" />
+                      <div className="flex flex-col items-center space-y-1">
+                        <RadioGroupItem value="low" id="low" className="sr-only" />
+                        <div className={`w-full py-2 px-3 rounded-md text-center border-2 transition-all cursor-pointer ${field.value === 'low' ? 'border-blue-500 bg-blue-50' : 'border-transparent bg-blue-100 hover:bg-blue-200'}`}>
+                          <FormLabel className="font-medium text-blue-700 cursor-pointer w-full flex justify-center items-center gap-1" htmlFor="low">
+                            <span>Low</span>
+                          </FormLabel>
+                        </div>
+                      </div>
                     </FormControl>
-                    <FormLabel className="font-normal rounded-full px-2 py-1 bg-blue-100 text-blue-700" htmlFor="low">
-                      Low
-                    </FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-1 space-y-0">
+                  
+                  <FormItem className="flex-1 space-y-0">
                     <FormControl>
-                      <RadioGroupItem value="medium" id="medium" />
+                      <div className="flex flex-col items-center space-y-1">
+                        <RadioGroupItem value="medium" id="medium" className="sr-only" />
+                        <div className={`w-full py-2 px-3 rounded-md text-center border-2 transition-all cursor-pointer ${field.value === 'medium' ? 'border-yellow-500 bg-yellow-50' : 'border-transparent bg-yellow-100 hover:bg-yellow-200'}`}>
+                          <FormLabel className="font-medium text-yellow-700 cursor-pointer w-full flex justify-center items-center gap-1" htmlFor="medium">
+                            <span>Medium</span>
+                          </FormLabel>
+                        </div>
+                      </div>
                     </FormControl>
-                    <FormLabel className="font-normal rounded-full px-2 py-1 bg-yellow-100 text-yellow-700" htmlFor="medium">
-                      Medium
-                    </FormLabel>
                   </FormItem>
-                  <FormItem className="flex items-center space-x-1 space-y-0">
+                  
+                  <FormItem className="flex-1 space-y-0">
                     <FormControl>
-                      <RadioGroupItem value="high" id="high" />
+                      <div className="flex flex-col items-center space-y-1">
+                        <RadioGroupItem value="high" id="high" className="sr-only" />
+                        <div className={`w-full py-2 px-3 rounded-md text-center border-2 transition-all cursor-pointer ${field.value === 'high' ? 'border-red-500 bg-red-50' : 'border-transparent bg-red-100 hover:bg-red-200'}`}>
+                          <FormLabel className="font-medium text-red-700 cursor-pointer w-full flex justify-center items-center gap-1" htmlFor="high">
+                            <span>High</span>
+                          </FormLabel>
+                        </div>
+                      </div>
                     </FormControl>
-                    <FormLabel className="font-normal rounded-full px-2 py-1 bg-red-100 text-red-700" htmlFor="high">
-                      High
-                    </FormLabel>
                   </FormItem>
                 </RadioGroup>
               </FormControl>
@@ -107,7 +121,11 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
           )}
         />
         
-        <Button type="submit" disabled={isSubmitting} className="w-full">
+        <Button 
+          type="submit" 
+          disabled={isSubmitting} 
+          className="w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-medium"
+        >
           Add Task
         </Button>
       </form>
