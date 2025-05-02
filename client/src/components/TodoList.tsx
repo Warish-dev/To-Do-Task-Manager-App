@@ -1,8 +1,6 @@
-import { useState } from "react";
-import TodoItem from "./TodoItem";
 import { Todo, Filter } from "@/lib/types";
-import { Loader2 } from "lucide-react";
-import { ClipboardList } from "lucide-react";
+import TodoItem from "./TodoItem";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface TodoListProps {
   todos: Todo[];
@@ -21,52 +19,47 @@ const TodoList = ({
   onDelete,
   onEdit,
 }: TodoListProps) => {
-  const [editingId, setEditingId] = useState<string | null>(null);
+  if (isLoading) {
+    return (
+      <div className="space-y-3">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="border rounded-md p-4">
+            <div className="flex items-center space-x-4">
+              <Skeleton className="h-4 w-4 rounded-sm" />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-3 w-[100px]" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
-  const handleEdit = (id: string) => {
-    setEditingId(id);
-  };
-
-  const handleSave = (id: string, text: string) => {
-    onEdit(id, text);
-    setEditingId(null);
-  };
-
-  const handleCancel = () => {
-    setEditingId(null);
-  };
+  if (todos.length === 0) {
+    return (
+      <div className="text-center py-6 text-muted-foreground">
+        {filter === "all"
+          ? "No tasks yet. Add a new task to get started!"
+          : filter === "active"
+          ? "No active tasks!"
+          : "No completed tasks!"}
+      </div>
+    );
+  }
 
   return (
-    <div className="divide-y divide-gray-200 max-h-80 overflow-y-auto">
-      {/* Loading State */}
-      {isLoading && (
-        <div className="flex justify-center items-center py-8">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        </div>
-      )}
-
-      {/* Empty State */}
-      {!isLoading && todos.length === 0 && (
-        <div className="py-8 text-center text-gray-500">
-          <ClipboardList className="h-10 w-10 mx-auto mb-2 text-gray-400" />
-          <p>No tasks found</p>
-        </div>
-      )}
-
-      {/* Todo Items */}
-      {!isLoading &&
-        todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            isEditing={editingId === todo.id}
-            onToggle={onToggle}
-            onDelete={onDelete}
-            onEdit={handleEdit}
-            onSave={handleSave}
-            onCancel={handleCancel}
-          />
-        ))}
+    <div className="space-y-2">
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onToggle={onToggle}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
+      ))}
     </div>
   );
 };

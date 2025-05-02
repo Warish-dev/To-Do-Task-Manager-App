@@ -1,5 +1,5 @@
 import { Filter } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface FilterTabsProps {
   currentFilter: Filter;
@@ -8,41 +8,18 @@ interface FilterTabsProps {
 
 const FilterTabs = ({ currentFilter, onFilterChange }: FilterTabsProps) => {
   return (
-    <div className="flex border-b">
-      <button
-        className={cn(
-          "flex-1 px-4 py-3 text-sm font-medium",
-          currentFilter === "all"
-            ? "border-b-2 border-primary text-primary"
-            : "text-gray-500 hover:text-gray-700"
-        )}
-        onClick={() => onFilterChange("all")}
-      >
-        All
-      </button>
-      <button
-        className={cn(
-          "flex-1 px-4 py-3 text-sm font-medium",
-          currentFilter === "active"
-            ? "border-b-2 border-primary text-primary"
-            : "text-gray-500 hover:text-gray-700"
-        )}
-        onClick={() => onFilterChange("active")}
-      >
-        Active
-      </button>
-      <button
-        className={cn(
-          "flex-1 px-4 py-3 text-sm font-medium",
-          currentFilter === "completed"
-            ? "border-b-2 border-primary text-primary"
-            : "text-gray-500 hover:text-gray-700"
-        )}
-        onClick={() => onFilterChange("completed")}
-      >
-        Completed
-      </button>
-    </div>
+    <Tabs
+      defaultValue={currentFilter}
+      value={currentFilter}
+      onValueChange={(value) => onFilterChange(value as Filter)}
+      className="w-full"
+    >
+      <TabsList className="grid w-full grid-cols-3">
+        <TabsTrigger value="all">All</TabsTrigger>
+        <TabsTrigger value="active">Active</TabsTrigger>
+        <TabsTrigger value="completed">Completed</TabsTrigger>
+      </TabsList>
+    </Tabs>
   );
 };
 

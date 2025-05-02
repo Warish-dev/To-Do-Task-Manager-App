@@ -1,31 +1,21 @@
 import { useState, useEffect } from "react";
-import { Todo } from "@/lib/types";
-import { loadTodos, saveTodos } from "@/lib/localStorage";
 import { v4 as uuidv4 } from "uuid";
-import { useToast } from "@/hooks/use-toast";
+import { Todo, Filter } from "@/lib/types";
+import { loadTodos, saveTodos } from "@/lib/localStorage";
 
 export function useTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [filter, setFilter] = useState<Filter>("all");
   const [isLoading, setIsLoading] = useState(true);
-  const { toast } = useToast();
 
-  // Load todos from localStorage when component mounts
+  // Load todos from localStorage on initial render
   useEffect(() => {
-    try {
-      const storedTodos = loadTodos();
-      setTodos(storedTodos);
-    } catch (error) {
-      toast({
-        title: "Error loading todos",
-        description: "Could not load your todos from storage",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }, [toast]);
+    const loadedTodos = loadTodos();
+    setTodos(loadedTodos);
+    setIsLoading(false);
+  }, []);
 
-  // Save todos to localStorage whenever todos change
+  // Save todos to localStorage whenever they change
   useEffect(() => {
     if (!isLoading) {
       saveTodos(todos);
@@ -40,19 +30,13 @@ export function useTodos() {
       completed: false,
       createdAt: new Date().toISOString(),
     };
-    
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-    
-    toast({
-      title: "Task added",
-      description: "Your new task has been added",
-    });
+    setTodos([...todos, newTodo]);
   };
 
-  // Toggle a todo's completed status
+  // Toggle todo completion status
   const toggleTodo = (id: string) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
+    setTodos(
+      todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
@@ -60,59 +44,31 @@ export function useTodos() {
 
   // Delete a todo
   const deleteTodo = (id: string) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-    
-    toast({
-      title: "Task deleted",
-      description: "Your task has been deleted",
-    });
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   // Edit a todo
   const editTodo = (id: string, text: string) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, text } : todo
-      )
+    setTodos(
+      todos.map((todo) => (todo.id === id ? { ...todo, text } : todo))
     );
-    
-    toast({
-      title: "Task updated",
-      description: "Your task has been updated",
-    });
   };
 
-  // Clear all completed todos
-  const clearCompleted = () => {
-    const completedCount = todos.filter(todo => todo.completed).length;
-    
-    if (completedCount === 0) {
-      toast({
-        title: "No completed tasks",
-        description: "There are no completed tasks to clear",
-      });
-      return;
-    }
-    
-    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
-    
-    toast({
-      title: "Completed tasks cleared",
-      description: `${completedCount} completed task(s) have been removed`,
-    });
-  };
-
-  // Count remaining (not completed) todos
-  const remainingCount = todos.filter((todo) => !todo.completed).length;
+  // Filter todos based on current filter
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true; // 'all' filter
+  });
 
   return {
-    todos,
-    isLoading,
+    todos: filteredTodos,
     addTodo,
     toggleTodo,
     deleteTodo,
     editTodo,
-    clearCompleted,
-    remainingCount,
+    filter,
+    setFilter,
+    isLoading,
   };
 }
