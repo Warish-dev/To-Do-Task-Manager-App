@@ -92,7 +92,9 @@ const TodoApp = () => {
         <CardContent className="pt-6">
           <TodoForm onAddTodo={addTodo} />
           
-          <FilterTabs currentFilter={filter} onFilterChange={setFilter} />
+          <div className="mt-6">
+            <FilterTabs currentFilter={filter} onFilterChange={setFilter} />
+          </div>
           
           <div className="mt-4">
             <TodoList
