@@ -107,12 +107,72 @@
 /* Green theme remains as default defined in :root and .dark */
 .theme-green {}
 
+/* Additional styling for buttons based on theme */
+@layer components {
+  /* Style the "Add Task" button with gradient */
+  button[type="submit"], 
+  button.bg-primary {
+    @apply bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70;
+  }
+  
+  /* Enhance the filter button colors */
+  button[aria-pressed="true"] {
+    @apply bg-primary/15 text-primary font-medium;
+  }
+  
+  /* Add subtle coloring to form inputs on focus */
+  input:focus, textarea:focus, select:focus {
+    @apply border-primary/50 ring-primary/30;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased text-foreground transition-colors duration-200;
+  }
+  
+  /* Theme-specific gradient backgrounds */
+  body {
+    @apply bg-gradient-to-b from-background to-background;
+  }
+  
+  /* Green theme background */
+  .theme-green body {
+    @apply bg-gradient-to-b from-background to-emerald-50/30;
+  }
+  
+  .dark.theme-green body {
+    @apply bg-gradient-to-b from-background to-emerald-950/30;
+  }
+  
+  /* Blue theme background */
+  .theme-blue body {
+    @apply bg-gradient-to-b from-background to-blue-50/30;
+  }
+  
+  .dark.theme-blue body {
+    @apply bg-gradient-to-b from-background to-blue-950/30;
+  }
+  
+  /* Orange theme background */
+  .theme-orange body {
+    @apply bg-gradient-to-b from-background to-orange-50/30;
+  }
+  
+  .dark.theme-orange body {
+    @apply bg-gradient-to-b from-background to-orange-950/30;
+  }
+  
+  /* Yellow theme background */
+  .theme-yellow body {
+    @apply bg-gradient-to-b from-background to-yellow-50/30;
+  }
+  
+  .dark.theme-yellow body {
+    @apply bg-gradient-to-b from-background to-yellow-950/30;
   }
 }

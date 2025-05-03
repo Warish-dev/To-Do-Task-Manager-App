@@ -172,7 +172,7 @@ const TodoApp = () => {
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <div className="text-center flex-1">
-          <Title className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary to-emerald-400 text-transparent bg-clip-text">
+          <Title className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary to-primary/70 text-transparent bg-clip-text">
             Todo List App
           </Title>
           <p className="text-muted-foreground mt-2">
@@ -218,8 +218,8 @@ const TodoApp = () => {
       </div>
 
       {/* Todo List */}
-      <Card className="border-primary/20 dark:border-primary/10">
-        <CardHeader className="pb-2 bg-primary/5 dark:bg-primary/10 rounded-t-lg">
+      <Card className="border-primary/20 dark:border-primary/10 shadow-lg">
+        <CardHeader className="pb-2 rounded-t-lg bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10">
           <div className="flex justify-between items-center">
             <Title className="text-primary">My Tasks</Title>
             <div className="flex gap-2">
