@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Todo List Application
 
 A modern, responsive to-do list application built with React, TypeScript, and a clean UI using Tailwind CSS and shadcn components.
@@ -108,3 +109,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [shadcn/ui](https://ui.shadcn.com/) for the beautiful UI components
 - [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
 - [Lucide Icons](https://lucide.dev/) for the clean and minimal icons
+=======
+# To-Do-Task-Manager-App
+>>>>>>> 06c74310c77e91e47ea2bd742c955ad114af71a4
