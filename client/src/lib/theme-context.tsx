@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
-export type ColorTheme = "green" | "blue" | "orange" | "yellow";
+export type ColorTheme = "green" | "blue" | "orange" | "yellow" | "original";
 export type DarkMode = "dark" | "light";
 
 export type ThemeContextType = {

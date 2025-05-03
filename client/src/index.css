@@ -104,6 +104,23 @@
   --ring: 45 93% 42%;
 }
 
+/* Original theme (teal-blue gradient) */
+.theme-original {
+  --primary: 186 100% 42%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 186 100% 94%;
+  --accent-foreground: 186 100% 42%;
+  --ring: 186 100% 42%;
+}
+
+.dark.theme-original {
+  --primary: 186 100% 37%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 186 100% 15%;
+  --accent-foreground: 0 0% 98%;
+  --ring: 186 100% 37%;
+}
+
 /* Green theme remains as default defined in :root and .dark */
 .theme-green {}
 
@@ -174,5 +191,14 @@
   
   .dark.theme-yellow body {
     @apply bg-gradient-to-b from-background to-yellow-950/30;
+  }
+  
+  /* Original theme background */
+  .theme-original body {
+    @apply bg-gradient-to-b from-background to-cyan-50/30;
+  }
+  
+  .dark.theme-original body {
+    @apply bg-gradient-to-b from-background to-cyan-950/30;
   }
 }

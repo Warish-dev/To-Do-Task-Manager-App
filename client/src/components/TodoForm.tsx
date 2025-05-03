@@ -62,14 +62,28 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button 
-          className="w-full bg-gradient-to-r from-primary to-primary/70 hover:from-primary hover:to-primary/80 text-primary-foreground font-medium"
+          className={cn(
+            "w-full font-medium",
+            colorTheme === "original"
+              ? "bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white"
+              : "bg-gradient-to-r from-primary to-primary/70 hover:from-primary hover:to-primary/80 text-primary-foreground"
+          )}
         >
           <PlusCircle className="mr-2 h-4 w-4" /> Add New Task
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader className="pb-2">
-          <DialogTitle className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 text-transparent bg-clip-text">Add New Task</DialogTitle>
+          <DialogTitle 
+            className={cn(
+              "text-xl font-bold text-transparent bg-clip-text",
+              colorTheme === "original"
+                ? "bg-gradient-to-r from-teal-500 to-blue-500"
+                : "bg-gradient-to-r from-primary to-primary/70"
+            )}
+          >
+            Add New Task
+          </DialogTitle>
           <DialogDescription className="text-muted-foreground">
             Fill in the details for your new task. Click save when you're done.
           </DialogDescription>
@@ -190,7 +204,12 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
               <Button 
                 type="submit" 
                 disabled={isSubmitting} 
-                className="bg-gradient-to-r from-primary to-primary/70 hover:from-primary hover:to-primary/80 text-primary-foreground font-medium mt-4"
+                className={cn(
+                  "font-medium mt-4",
+                  colorTheme === "original"
+                    ? "bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white"
+                    : "bg-gradient-to-r from-primary to-primary/70 hover:from-primary hover:to-primary/80 text-primary-foreground"
+                )}
               >
                 Save Task
               </Button>

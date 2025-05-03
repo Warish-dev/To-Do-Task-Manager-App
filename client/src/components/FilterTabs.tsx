@@ -13,10 +13,18 @@ const FilterTabs = ({ currentFilter, onFilterChange }: FilterTabsProps) => {
   
   // Define gradient backgrounds based on color theme
   const getTabsListGradient = () => {
+    // Special case for the "original" theme
+    if (colorTheme === "original") {
+      return "bg-gradient-to-r from-teal-500/20 to-blue-500/20 dark:from-teal-500/30 dark:to-blue-500/30";
+    }
     return "bg-gradient-to-r from-primary/20 to-primary/10 dark:from-primary/30 dark:to-primary/20";
   };
   
   const getActiveTabGradient = () => {
+    // Special case for the "original" theme
+    if (colorTheme === "original") {
+      return "bg-gradient-to-r from-teal-500 to-blue-500 text-white data-[state=active]:text-white";
+    }
     return "bg-gradient-to-r from-primary to-primary/80 text-primary-foreground data-[state=active]:text-primary-foreground";
   };
   

@@ -17,6 +17,7 @@ export function ThemeSelector() {
     { value: "blue", label: "Blue", color: "bg-blue-500" },
     { value: "orange", label: "Orange", color: "bg-orange-500" },
     { value: "yellow", label: "Yellow", color: "bg-yellow-500" },
+    { value: "original", label: "Original", color: "bg-gradient-to-r from-teal-500 to-blue-500" },
   ];
 
   return (
