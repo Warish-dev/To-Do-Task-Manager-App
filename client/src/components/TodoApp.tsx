@@ -7,6 +7,8 @@ import SignupForm from "./SignupForm";
 import { Title } from "@/components/ui/title";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useThemeContext } from "@/lib/theme-context";
+import { cn } from "@/lib/utils";
 import { 
   Flag, 
   CheckCircle, 
@@ -43,6 +45,7 @@ const TodoApp = () => {
   const [signupOpen, setSignupOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const { toast } = useToast();
+  const { colorTheme } = useThemeContext();
   
   const {
     todos,
@@ -172,7 +175,14 @@ const TodoApp = () => {
     <div className="container max-w-4xl mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <div className="text-center flex-1">
-          <Title className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-primary to-primary/70 text-transparent bg-clip-text">
+          <Title 
+            className={cn(
+              "text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text",
+              colorTheme === "original"
+                ? "bg-gradient-to-r from-teal-500 to-blue-500"
+                : "bg-gradient-to-r from-primary to-primary/70"
+            )}
+          >
             Todo List App
           </Title>
           <p className="text-muted-foreground mt-2">
@@ -219,9 +229,20 @@ const TodoApp = () => {
 
       {/* Todo List */}
       <Card className="border-primary/20 dark:border-primary/10 shadow-lg">
-        <CardHeader className="pb-2 rounded-t-lg bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10">
+        <CardHeader 
+          className={cn(
+            "pb-2 rounded-t-lg",
+            colorTheme === "original"
+              ? "bg-gradient-to-r from-teal-500/10 to-blue-500/5 dark:from-teal-500/20 dark:to-blue-500/10"
+              : "bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10"
+          )}
+        >
           <div className="flex justify-between items-center">
-            <Title className="text-primary">My Tasks</Title>
+            <Title 
+              className={colorTheme === "original" ? "text-teal-600 dark:text-teal-400" : "text-primary"}
+            >
+              My Tasks
+            </Title>
             <div className="flex gap-2">
               <Badge variant="outline" className="bg-primary/10 dark:bg-primary/20">
                 {activeCount} active
@@ -287,7 +308,16 @@ const TodoApp = () => {
       <Dialog open={signupOpen} onOpenChange={setSignupOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl text-primary">Sign Up</DialogTitle>
+            <DialogTitle 
+              className={cn(
+                "text-xl",
+                colorTheme === "original"
+                  ? "bg-gradient-to-r from-teal-500 to-blue-500 text-transparent bg-clip-text"
+                  : "text-primary"
+              )}
+            >
+              Sign Up
+            </DialogTitle>
             <DialogDescription>
               Create an account to save your tasks across devices
             </DialogDescription>
