@@ -18,6 +18,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { PlusCircle } from "lucide-react";
+import { useThemeContext } from "@/lib/theme-context";
+import { cn } from "@/lib/utils";
 
 // Form validation schema
 const formSchema = z.object({
@@ -37,6 +39,7 @@ interface TodoFormProps {
 const TodoForm = ({ onAddTodo }: TodoFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [open, setOpen] = useState(false);
+  const { colorTheme } = useThemeContext();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -59,15 +62,15 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button 
-          className="w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-medium"
+          className="w-full bg-gradient-to-r from-primary to-primary/70 hover:from-primary hover:to-primary/80 text-primary-foreground font-medium"
         >
           <PlusCircle className="mr-2 h-4 w-4" /> Add New Task
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[550px]">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-primary">Add New Task</DialogTitle>
-          <DialogDescription>
+        <DialogHeader className="pb-2">
+          <DialogTitle className="text-xl font-bold bg-gradient-to-r from-primary to-primary/70 text-transparent bg-clip-text">Add New Task</DialogTitle>
+          <DialogDescription className="text-muted-foreground">
             Fill in the details for your new task. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
@@ -187,7 +190,7 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
               <Button 
                 type="submit" 
                 disabled={isSubmitting} 
-                className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-medium mt-4"
+                className="bg-gradient-to-r from-primary to-primary/70 hover:from-primary hover:to-primary/80 text-primary-foreground font-medium mt-4"
               >
                 Save Task
               </Button>
