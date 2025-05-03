@@ -63,9 +63,9 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
       <DialogTrigger asChild>
         <Button 
           className={cn(
-            "w-full font-medium",
+            "w-full font-medium text-white",
             colorTheme === "original" 
-              ? "bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white"
+              ? "bg-gradient-to-r from-teal-500 to-blue-500 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600"
               : "bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary/70 text-primary-foreground"
           )}
         >
@@ -205,9 +205,9 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
                 type="submit" 
                 disabled={isSubmitting} 
                 className={cn(
-                  "font-medium mt-4",
+                  "font-medium mt-4 text-white",
                   colorTheme === "original" 
-                    ? "bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white"
+                    ? "bg-gradient-to-r from-teal-500 to-blue-500 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600"
                     : "bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary/70 text-primary-foreground"
                 )}
               >

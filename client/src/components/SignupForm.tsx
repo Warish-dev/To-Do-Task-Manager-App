@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -27,6 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { useThemeContext } from "@/lib/theme-context";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -44,6 +46,7 @@ interface SignupFormProps {
 
 const SignupForm = ({ onUserSignup }: SignupFormProps) => {
   const { toast } = useToast();
+  const { colorTheme } = useThemeContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<FormValues>({
@@ -148,7 +151,12 @@ const SignupForm = ({ onUserSignup }: SignupFormProps) => {
 
           <Button 
             type="submit" 
-            className="w-full"
+            className={cn(
+              "w-full font-medium",
+              colorTheme === "original" 
+                ? "text-white bg-gradient-to-r from-teal-500 to-blue-500 hover:bg-gradient-to-r hover:from-teal-600 hover:to-blue-600"
+                : "bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary/70 text-primary-foreground"
+            )}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Signing up..." : "Sign Up"}
