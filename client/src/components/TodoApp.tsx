@@ -15,7 +15,9 @@ import {
   Edit, 
   SlidersHorizontal, 
   UserPlus,
-  X
+  X,
+  LogOut,
+  User
 } from "lucide-react";
 import { Priority, Todo, Filter } from "@/lib/types";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -30,8 +32,15 @@ import {
   DialogClose
 } from "@/components/ui/dialog";
 
+interface User {
+  name: string;
+  email: string;
+  gender: string;
+}
+
 const TodoApp = () => {
   const [signupOpen, setSignupOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const { toast } = useToast();
   
   const {
@@ -123,9 +132,19 @@ const TodoApp = () => {
     }
   };
 
+  // Handle user logout
+  const handleLogout = () => {
+    setCurrentUser(null);
+    toast({
+      title: "👋 Logged out",
+      description: "You have been successfully logged out."
+    });
+  };
+
   // Handle user signup
-  const handleUserSignup = (userData: any) => {
+  const handleUserSignup = (userData: User) => {
     console.log("User signed up:", userData);
+    setCurrentUser(userData);
     toast({
       title: "👋 Welcome!",
       description: `Hi ${userData.name}, your account has been created successfully!`
@@ -133,9 +152,19 @@ const TodoApp = () => {
   };
 
   // Handle signup completion and closing dialog
-  const handleSignupComplete = (userData: any) => {
+  const handleSignupComplete = (userData: User) => {
     handleUserSignup(userData);
     setSignupOpen(false);
+  };
+  
+  // Get user initials
+  const getUserInitials = () => {
+    if (!currentUser || !currentUser.name) return "";
+    const nameParts = currentUser.name.split(" ");
+    if (nameParts.length === 1) {
+      return nameParts[0].substring(0, 2).toUpperCase();
+    }
+    return `${nameParts[0].charAt(0)}${nameParts[1].charAt(0)}`.toUpperCase();
   };
 
   return (
@@ -150,15 +179,38 @@ const TodoApp = () => {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Button 
-            size="sm" 
-            variant="outline" 
-            className="flex items-center gap-1 bg-primary/10 hover:bg-primary/20 border-primary/20"
-            onClick={() => setSignupOpen(true)}
-          >
-            <UserPlus size={16} />
-            <span className="hidden sm:inline">Sign Up</span>
-          </Button>
+          {currentUser ? (
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">
+                  {getUserInitials()}
+                </div>
+                <span className="hidden sm:inline text-sm font-medium">
+                  {currentUser.name.split(' ')[0]}
+                </span>
+              </div>
+              <Button
+                size="sm"
+                variant="ghost"
+                className="rounded-full h-8 w-8 p-0"
+                title="Logout"
+                onClick={handleLogout}
+              >
+                <LogOut size={16} />
+                <span className="sr-only">Logout</span>
+              </Button>
+            </div>
+          ) : (
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="flex items-center gap-1 bg-primary/10 hover:bg-primary/20 border-primary/20"
+              onClick={() => setSignupOpen(true)}
+            >
+              <UserPlus size={16} />
+              <span className="hidden sm:inline">Sign Up</span>
+            </Button>
+          )}
           <ThemeToggle />
         </div>
       </div>
