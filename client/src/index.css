@@ -3,49 +3,109 @@
 @tailwind utilities;
 
 :root {
-      --background: 0 0% 100%;
---foreground: 20 14.3% 4.1%;
---muted: 60 4.8% 95.9%;
---muted-foreground: 25 5.3% 44.7%;
---popover: 0 0% 100%;
---popover-foreground: 20 14.3% 4.1%;
---card: 0 0% 100%;
---card-foreground: 20 14.3% 4.1%;
---border: 20 5.9% 90%;
---input: 20 5.9% 90%;
---primary: 142 76% 36%; /* Green theme */
---primary-foreground: 355 100% 97%;
---secondary: 60 4.8% 95.9%;
---secondary-foreground: 24 9.8% 10%;
---accent: 142 76% 94%; /* Light green accent */
---accent-foreground: 142 76% 36%;
---destructive: 0 84.2% 60.2%;
---destructive-foreground: 60 9.1% 97.8%;
---ring: 142 76% 36%;
---radius: 0.5rem;
-  }
-  .dark {
-      --background: 240 10% 3.9%;
---foreground: 0 0% 98%;
---muted: 240 3.7% 15.9%;
---muted-foreground: 240 5% 64.9%;
---popover: 240 10% 3.9%;
---popover-foreground: 0 0% 98%;
---card: 240 10% 3.9%;
---card-foreground: 0 0% 98%;
---border: 240 3.7% 15.9%;
---input: 240 3.7% 15.9%;
---primary: 142 70% 30%; /* Green theme for dark mode */
---primary-foreground: 355 100% 97%;
---secondary: 240 3.7% 15.9%;
---secondary-foreground: 0 0% 98%;
---accent: 142 70% 12%;
---accent-foreground: 0 0% 98%;
---destructive: 0 62.8% 30.6%;
---destructive-foreground: 0 0% 98%;
---ring: 142 70% 30%;
---radius: 0.5rem;
-  }
+  /* Base colors shared by all themes */
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --radius: 0.5rem;
+  
+  /* Green theme by default */
+  --primary: 142 76% 36%;
+  --primary-foreground: 355 100% 97%;
+  --accent: 142 76% 94%;
+  --accent-foreground: 142 76% 36%;
+  --ring: 142 76% 36%;
+}
+
+/* Dark mode base colors */
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  
+  /* Green theme for dark mode by default */
+  --primary: 142 70% 30%;
+  --primary-foreground: 355 100% 97%;
+  --accent: 142 70% 12%;
+  --accent-foreground: 0 0% 98%;
+  --ring: 142 70% 30%;
+}
+
+/* Blue theme */
+.theme-blue {
+  --primary: 210 100% 50%;
+  --primary-foreground: 210 40% 98%;
+  --accent: 210 100% 94%;
+  --accent-foreground: 210 100% 50%;
+  --ring: 210 100% 50%;
+}
+
+.dark.theme-blue {
+  --primary: 210 100% 45%;
+  --primary-foreground: 210 40% 98%;
+  --accent: 210 100% 15%;
+  --accent-foreground: 0 0% 98%;
+  --ring: 210 100% 45%;
+}
+
+/* Orange theme */
+.theme-orange {
+  --primary: 25 95% 53%;
+  --primary-foreground: 20 10% 98%;
+  --accent: 25 95% 94%;
+  --accent-foreground: 25 95% 53%;
+  --ring: 25 95% 53%;
+}
+
+.dark.theme-orange {
+  --primary: 25 95% 48%;
+  --primary-foreground: 20 10% 98%;
+  --accent: 25 95% 15%;
+  --accent-foreground: 0 0% 98%;
+  --ring: 25 95% 48%;
+}
+
+/* Yellow theme */
+.theme-yellow {
+  --primary: 45 93% 47%;
+  --primary-foreground: 20 10% 98%;
+  --accent: 45 93% 94%;
+  --accent-foreground: 45 93% 47%;
+  --ring: 45 93% 47%;
+}
+
+.dark.theme-yellow {
+  --primary: 45 93% 42%;
+  --primary-foreground: 20 10% 98%;
+  --accent: 45 93% 15%;
+  --accent-foreground: 0 0% 98%;
+  --ring: 45 93% 42%;
+}
+
+/* Green theme remains as default defined in :root and .dark */
+.theme-green {}
 
 @layer base {
   * {

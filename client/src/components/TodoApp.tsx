@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Priority, Todo, Filter } from "@/lib/types";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ThemeSelector } from "@/components/ThemeSelector";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import {
@@ -211,6 +212,7 @@ const TodoApp = () => {
               <span className="hidden sm:inline">Sign Up</span>
             </Button>
           )}
+          <ThemeSelector />
           <ThemeToggle />
         </div>
       </div>
