@@ -62,7 +62,7 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button 
-          className="w-full font-medium bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white"
+          className="w-full font-medium bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white"
         >
           <PlusCircle className="mr-2 h-4 w-4" /> Add New Task
         </Button>
@@ -199,7 +199,7 @@ const TodoForm = ({ onAddTodo }: TodoFormProps) => {
               <Button 
                 type="submit" 
                 disabled={isSubmitting} 
-                className="font-medium mt-4 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white"
+                className="font-medium mt-4 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white"
               >
                 Save Task
               </Button>

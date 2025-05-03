@@ -13,11 +13,11 @@ const FilterTabs = ({ currentFilter, onFilterChange }: FilterTabsProps) => {
   
   // Define gradient backgrounds based on color theme
   const getTabsListGradient = () => {
-    return "bg-gradient-to-r from-teal-500/20 to-cyan-500/20 dark:from-teal-500/30 dark:to-cyan-500/30";
+    return "bg-gradient-to-r from-teal-500/20 to-blue-500/20 dark:from-teal-500/30 dark:to-blue-500/30";
   };
   
   const getActiveTabGradient = () => {
-    return "bg-gradient-to-r from-teal-500 to-cyan-500 text-white data-[state=active]:text-white";
+    return "bg-gradient-to-r from-teal-500 to-blue-500 text-white data-[state=active]:text-white";
   };
   
   return (

@@ -176,7 +176,7 @@ const TodoApp = () => {
       <div className="flex justify-between items-center mb-8">
         <div className="text-center flex-1">
           <Title 
-            className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-500"
+            className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-500"
           >
             Todo List App
           </Title>
@@ -225,7 +225,7 @@ const TodoApp = () => {
       {/* Todo List */}
       <Card className="border-primary/20 dark:border-primary/10 shadow-lg">
         <CardHeader 
-          className="pb-2 rounded-t-lg bg-gradient-to-r from-teal-500/10 to-cyan-500/5 dark:from-teal-500/20 dark:to-cyan-500/10"
+          className="pb-2 rounded-t-lg bg-gradient-to-r from-teal-500/10 to-blue-500/5 dark:from-teal-500/20 dark:to-blue-500/10"
         >
           <div className="flex justify-between items-center">
             <Title className="text-teal-600 dark:text-teal-400">
@@ -297,7 +297,7 @@ const TodoApp = () => {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle 
-              className="text-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-transparent bg-clip-text"
+              className="text-xl bg-gradient-to-r from-teal-500 to-blue-500 text-transparent bg-clip-text"
             >
               Sign Up
             </DialogTitle>
