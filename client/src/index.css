@@ -158,47 +158,47 @@
   }
   
   /* Green theme background */
-  .theme-green body {
+  .theme-green {
     @apply bg-gradient-to-b from-background to-emerald-50/30;
   }
   
-  .dark.theme-green body {
+  .dark.theme-green {
     @apply bg-gradient-to-b from-background to-emerald-950/30;
   }
   
   /* Blue theme background */
-  .theme-blue body {
+  .theme-blue {
     @apply bg-gradient-to-b from-background to-blue-50/30;
   }
   
-  .dark.theme-blue body {
+  .dark.theme-blue {
     @apply bg-gradient-to-b from-background to-blue-950/30;
   }
   
   /* Orange theme background */
-  .theme-orange body {
+  .theme-orange {
     @apply bg-gradient-to-b from-background to-orange-50/30;
   }
   
-  .dark.theme-orange body {
+  .dark.theme-orange {
     @apply bg-gradient-to-b from-background to-orange-950/30;
   }
   
   /* Yellow theme background */
-  .theme-yellow body {
+  .theme-yellow {
     @apply bg-gradient-to-b from-background to-yellow-50/30;
   }
   
-  .dark.theme-yellow body {
+  .dark.theme-yellow {
     @apply bg-gradient-to-b from-background to-yellow-950/30;
   }
   
   /* Original theme background */
-  .theme-original body {
+  .theme-original {
     @apply bg-gradient-to-b from-background to-cyan-50/30;
   }
   
-  .dark.theme-original body {
+  .dark.theme-original {
     @apply bg-gradient-to-b from-background to-cyan-950/30;
   }
 }

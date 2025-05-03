@@ -47,8 +47,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     // Apply theme class to body based on selected color theme
-    document.body.classList.remove("theme-green", "theme-blue", "theme-orange", "theme-yellow");
-    document.body.classList.add(`theme-${colorTheme}`);
+    document.documentElement.classList.remove("theme-green", "theme-blue", "theme-orange", "theme-yellow", "theme-original");
+    document.documentElement.classList.add(`theme-${colorTheme}`);
     localStorage.setItem("colorTheme", colorTheme);
   }, [colorTheme]);
 

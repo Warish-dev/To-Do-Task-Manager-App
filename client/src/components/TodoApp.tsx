@@ -176,7 +176,12 @@ const TodoApp = () => {
       <div className="flex justify-between items-center mb-8">
         <div className="text-center flex-1">
           <Title 
-            className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-500"
+            className={cn(
+              "text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text",
+              colorTheme === "original"
+                ? "bg-gradient-to-r from-teal-500 to-blue-500"
+                : "bg-gradient-to-r from-primary to-primary/70"
+            )}
           >
             Todo List App
           </Title>
@@ -225,10 +230,15 @@ const TodoApp = () => {
       {/* Todo List */}
       <Card className="border-primary/20 dark:border-primary/10 shadow-lg">
         <CardHeader 
-          className="pb-2 rounded-t-lg bg-gradient-to-r from-teal-500/10 to-blue-500/5 dark:from-teal-500/20 dark:to-blue-500/10"
+          className={cn(
+            "pb-2 rounded-t-lg",
+            colorTheme === "original"
+              ? "bg-gradient-to-r from-teal-500/10 to-blue-500/5 dark:from-teal-500/20 dark:to-blue-500/10"
+              : "bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10"
+          )}
         >
           <div className="flex justify-between items-center">
-            <Title className="text-teal-600 dark:text-teal-400">
+            <Title className={colorTheme === "original" ? "text-teal-600 dark:text-teal-400" : "text-primary"}>
               My Tasks
             </Title>
             <div className="flex gap-2">
@@ -297,7 +307,12 @@ const TodoApp = () => {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle 
-              className="text-xl bg-gradient-to-r from-teal-500 to-blue-500 text-transparent bg-clip-text"
+              className={cn(
+                "text-xl text-transparent bg-clip-text",
+                colorTheme === "original"
+                  ? "bg-gradient-to-r from-teal-500 to-blue-500" 
+                  : "bg-gradient-to-r from-primary to-primary/70"
+              )}
             >
               Sign Up
             </DialogTitle>
