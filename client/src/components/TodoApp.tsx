@@ -98,17 +98,7 @@ const TodoApp = () => {
   
   const setFilter = (newFilter: Filter) => {
     setFilterOriginal(newFilter);
-    
-    const filterMessages = {
-      all: "Showing all tasks",
-      active: "Showing active tasks only",
-      completed: "Showing completed tasks only"
-    };
-    
-    toast({
-      title: "🔍 Filter changed",
-      description: filterMessages[newFilter]
-    });
+    // Removed filter change toast notification
   };
 
   const activeCount = todos.filter((todo) => !todo.completed).length;
